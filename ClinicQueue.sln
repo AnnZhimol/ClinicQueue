@@ -5,6 +5,8 @@ VisualStudioVersion = 17.11.35327.3
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClinicQueueWPF", "ClinicQueueWPF\ClinicQueueWPF.csproj", "{B61A81B9-0724-4269-B60B-F5A0927FB472}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClinicQueueDataBaseImplement", "ClinicQueueDataBaseImplement\ClinicQueueDataBaseImplement.csproj", "{A58EF139-ABED-4E32-A5D8-18B91FBD1BC4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{B61A81B9-0724-4269-B60B-F5A0927FB472}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B61A81B9-0724-4269-B60B-F5A0927FB472}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B61A81B9-0724-4269-B60B-F5A0927FB472}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A58EF139-ABED-4E32-A5D8-18B91FBD1BC4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A58EF139-ABED-4E32-A5D8-18B91FBD1BC4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A58EF139-ABED-4E32-A5D8-18B91FBD1BC4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A58EF139-ABED-4E32-A5D8-18B91FBD1BC4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
