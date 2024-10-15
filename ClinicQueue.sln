@@ -3,9 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.11.35327.3
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClinicQueueWPF", "ClinicQueueWPF\ClinicQueueWPF.csproj", "{B61A81B9-0724-4269-B60B-F5A0927FB472}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClinicQueueDataBaseImplement", "ClinicQueueDataBaseImplement\ClinicQueueDataBaseImplement.csproj", "{A58EF139-ABED-4E32-A5D8-18B91FBD1BC4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClinicQueueView", "ClinicQueueView\ClinicQueueView.csproj", "{EF9C2374-9B0C-4286-BF83-0AA407FBC72E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClinicQueueDataModels", "ClinicQueueDataModels\ClinicQueueDataModels.csproj", "{B1AF23C1-13D5-4CFE-8C78-C728214BBD7F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClinicQueueContracts", "ClinicQueueContracts\ClinicQueueContracts.csproj", "{6BC048AD-B5ED-4211-93FD-839A2D182839}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClinicQueueBusinessLogic", "ClinicQueueBusinessLogic\ClinicQueueBusinessLogic.csproj", "{536A1273-8EA1-4618-BCA9-9F3023BDCD74}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,14 +19,26 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{B61A81B9-0724-4269-B60B-F5A0927FB472}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B61A81B9-0724-4269-B60B-F5A0927FB472}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B61A81B9-0724-4269-B60B-F5A0927FB472}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B61A81B9-0724-4269-B60B-F5A0927FB472}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A58EF139-ABED-4E32-A5D8-18B91FBD1BC4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A58EF139-ABED-4E32-A5D8-18B91FBD1BC4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A58EF139-ABED-4E32-A5D8-18B91FBD1BC4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A58EF139-ABED-4E32-A5D8-18B91FBD1BC4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EF9C2374-9B0C-4286-BF83-0AA407FBC72E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EF9C2374-9B0C-4286-BF83-0AA407FBC72E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EF9C2374-9B0C-4286-BF83-0AA407FBC72E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EF9C2374-9B0C-4286-BF83-0AA407FBC72E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B1AF23C1-13D5-4CFE-8C78-C728214BBD7F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B1AF23C1-13D5-4CFE-8C78-C728214BBD7F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B1AF23C1-13D5-4CFE-8C78-C728214BBD7F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B1AF23C1-13D5-4CFE-8C78-C728214BBD7F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6BC048AD-B5ED-4211-93FD-839A2D182839}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6BC048AD-B5ED-4211-93FD-839A2D182839}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6BC048AD-B5ED-4211-93FD-839A2D182839}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6BC048AD-B5ED-4211-93FD-839A2D182839}.Release|Any CPU.Build.0 = Release|Any CPU
+		{536A1273-8EA1-4618-BCA9-9F3023BDCD74}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{536A1273-8EA1-4618-BCA9-9F3023BDCD74}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{536A1273-8EA1-4618-BCA9-9F3023BDCD74}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{536A1273-8EA1-4618-BCA9-9F3023BDCD74}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
