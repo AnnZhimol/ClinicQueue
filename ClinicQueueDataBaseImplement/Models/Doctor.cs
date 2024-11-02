@@ -37,6 +37,8 @@ namespace ClinicQueueDataBaseImplement.Models
         public int Id { get; set; }
         [ForeignKey("DoctorId")]
         public virtual List<Appointment> Appointments { get; set; } = new();
+        [ForeignKey("DoctorId")]
+        public virtual List<ElectronicQueue> ElectronicQueue { get; set; } = new();
         public static Doctor? Create(DoctorBindingModel model)
         {
             if (model == null)

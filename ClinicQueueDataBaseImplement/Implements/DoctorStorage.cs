@@ -50,7 +50,6 @@ namespace ClinicQueueDataBaseImplement.Implements
             }
             using var context = new ClinicQueueDataBase();
             return context.Doctors.Where(x => x.Surname.Contains(model.Surname) && x.Name.Contains(model.Name)).Select(x => x.GetViewModel).ToList();
-
         }
 
         public DoctorViewModel? Insert(DoctorBindingModel model)
