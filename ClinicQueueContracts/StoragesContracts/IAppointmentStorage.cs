@@ -8,6 +8,7 @@ namespace ClinicQueueContracts.StoragesContracts
     {
         List<AppointmentViewModel> GetAll();
         List<AppointmentViewModel> GetFilteredAll(AppointmentSearchModel model);
+        bool ReservationNumberExists(int reservationNumber);
         AppointmentViewModel? GetElement(AppointmentSearchModel model);
         AppointmentViewModel? Insert(AppointmentBindingModel model);
         AppointmentViewModel? Delete(AppointmentBindingModel model);

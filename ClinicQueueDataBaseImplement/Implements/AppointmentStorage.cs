@@ -131,6 +131,12 @@ namespace ClinicQueueDataBaseImplement.Implements
                           ?.GetViewModel;
         }
 
+        public bool ReservationNumberExists(int reservationNumber)
+        {
+            return GetAll().Any(a => a.ReservationNumber == reservationNumber);
+        }
+
+
         public AppointmentViewModel? Update(AppointmentBindingModel model)
         {
             using var context = new ClinicQueueDataBase();

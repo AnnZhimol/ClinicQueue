@@ -12,8 +12,5 @@ namespace ClinicQueueContracts.BindingModels
         public int? PatientId { get; set; }
         public int DoctorId { get; set; }
         public int ElectronicQueueId { get; set; }
-        //public string PatientFIO { get; set; } = string.Empty;
-        //public string DoctorFIO { get; set; } = string.Empty;
-        //public int AppointmentCabinet { get; set; }
     }
 }
