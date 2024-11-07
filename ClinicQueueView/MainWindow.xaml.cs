@@ -11,10 +11,12 @@ namespace ClinicQueueView
     {
         private readonly IAdminLogic _adminLogic;
         private readonly IDoctorLogic _doctorLogic;
-        public MainWindow(IAdminLogic adminLogic, IDoctorLogic doctorLogic)
+        private readonly IScheduleLogic _scheduleLogic;
+        public MainWindow(IAdminLogic adminLogic, IDoctorLogic doctorLogic, IScheduleLogic scheduleLogic)
         {
             _adminLogic = adminLogic;
             _doctorLogic = doctorLogic;
+            _scheduleLogic = scheduleLogic;
             InitializeComponent();
         }
 
@@ -96,7 +98,7 @@ namespace ClinicQueueView
                 if (admin != null)
                 {
                     MessageBox.Show("Добро пожаловать, Администратор!", "Успешный вход", MessageBoxButton.OK, MessageBoxImage.Information);
-                    AdminWindow adminWindow = new AdminWindow(_adminLogic, _doctorLogic, admin);
+                    AdminWindow adminWindow = new AdminWindow(_adminLogic, _doctorLogic, _scheduleLogic, admin);
                     adminWindow.Show();
                     Close();
                 }

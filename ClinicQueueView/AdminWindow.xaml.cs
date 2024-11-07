@@ -23,13 +23,15 @@ namespace ClinicQueueView
     {
         private readonly IAdminLogic _adminLogic;
         private readonly IDoctorLogic _doctorLogic;
+        private readonly IScheduleLogic _scheduleLogic;
         private List<DoctorViewModel> _allDoctors;
         private readonly AdminViewModel _admin;
 
-        public AdminWindow(IAdminLogic adminLogic, IDoctorLogic doctorLogic, AdminViewModel admin)
+        public AdminWindow(IAdminLogic adminLogic, IDoctorLogic doctorLogic, IScheduleLogic scheduleLogic, AdminViewModel admin)
         {
             _adminLogic = adminLogic;
             _doctorLogic = doctorLogic;
+            _scheduleLogic = scheduleLogic;
             _admin = admin;
             InitializeComponent();
             Loaded += AdminWindow_Loaded;
@@ -64,7 +66,7 @@ namespace ClinicQueueView
 
             if (result == MessageBoxResult.Yes)
             {
-                var mainWindow = new MainWindow(_adminLogic, _doctorLogic);
+                var mainWindow = new MainWindow(_adminLogic, _doctorLogic, _scheduleLogic);
                 mainWindow.Show();
                 this.Close();
             }
@@ -121,7 +123,6 @@ namespace ClinicQueueView
                 MessageBox.Show("Пожалуйста, выберите врача для выполнения действия.", "Предупреждение", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
         }
-
         private void DeleteDoctorMenuItem_Click(object sender, RoutedEventArgs e)
         {
             if (DoctorsListView.SelectedItem is DoctorViewModel selectedDoctor)
@@ -157,6 +158,16 @@ namespace ClinicQueueView
             if (DoctorsListView.SelectedItem is DoctorViewModel selectedDoctor)
             {
                 var editDoctorWindow = new EditDoctorWindow(_doctorLogic, selectedDoctor);
+                editDoctorWindow.ShowDialog();
+                LoadDoctors();
+            }
+        }
+
+        private void ScheduleMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            if (DoctorsListView.SelectedItem is DoctorViewModel selectedDoctor)
+            {
+                var editDoctorWindow = new EditDoctorScheduleWindow(_scheduleLogic, _doctorLogic, selectedDoctor, _admin);
                 editDoctorWindow.ShowDialog();
                 LoadDoctors();
             }

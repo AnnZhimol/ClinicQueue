@@ -96,8 +96,9 @@
                 <ListView Name="DoctorsListView" Height="200" Margin="10" MouseRightButtonDown="DoctorsListView_MouseRightButtonUp">
                     <ListView.ContextMenu>
                         <ContextMenu>
-                            <MenuItem Header="Изменить" Click="EditDoctor_Click"/>
+                            <MenuItem Header="Изменить данные" Click="EditDoctor_Click"/>
                             <MenuItem Header="Удалить" Click="DeleteDoctorMenuItem_Click"/>
+                            <MenuItem Header="Расписание" Click="ScheduleMenuItem_Click"/>
                         </ContextMenu>
                     </ListView.ContextMenu>
                     <ListView.View>

@@ -56,7 +56,7 @@
     </Window.Resources>
     <Grid>
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-            <TextBlock Text="Добавить нового врача" FontSize="20" FontWeight="Bold" Foreground="#0277BD" Margin="0,0,0,20"/>
+            <TextBlock Text="Добавить нового врача" HorizontalAlignment="Center" FontSize="20" FontWeight="Bold" Foreground="#0277BD" Margin="0,0,0,20"/>
             <Label Content="Имя" HorizontalAlignment="Left" Margin="5,0,0,0"/>
             <TextBox Name="FirstNameTextBox" Tag="Введите имя" Text="Введите имя" GotFocus="TextBox_GotFocus" LostFocus="TextBox_LostFocus" />
             <Label Content="Фамилия" HorizontalAlignment="Left" Margin="5,0,0,0"/>
@@ -73,7 +73,10 @@
             <ComboBox Name="RoomNumberComboBox" Text="Кабинет">
             </ComboBox>
 
-            <Button Content="Добавить" Click="SaveDoctorButton_Click" />
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,20,0,0">
+                <Button Content="Добваить" Click="SaveDoctorButton_Click" />
+                <Button Content="Отменить" Click="CancelButton_Click" />
+            </StackPanel>
         </StackPanel>
     </Grid>
 </Window>

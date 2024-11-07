@@ -32,23 +32,33 @@ namespace ClinicQueueView
             PasswordBox.Password = _doctor.Password;
         }
 
+        private void CancelButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+
         private void SaveDoctorButton_Click(object sender, RoutedEventArgs e)
         {
-            var updatedDoctor = new DoctorBindingModel
+            var result = MessageBox.Show($"Вы уверены, что хотите изменить данные?", "Подтверждение изменения", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+            if (result == MessageBoxResult.Yes)
             {
-                Id = _doctor.Id,
-                Name = FirstNameTextBox.Text,
-                Surname = LastNameTextBox.Text,
-                Patronymic = MiddleNameTextBox.Text,
-                Password = PasswordBox.Password,
-                Specialization = ((Specialization)SpecializationComboBox.SelectedItem).ToString(),
-                CabinetNumber = ((RoomNumber)RoomNumberComboBox.SelectedItem).ToString()
-            };
+                var updatedDoctor = new DoctorBindingModel
+                {
+                    Id = _doctor.Id,
+                    Name = FirstNameTextBox.Text,
+                    Surname = LastNameTextBox.Text,
+                    Patronymic = MiddleNameTextBox.Text,
+                    Password = PasswordBox.Password,
+                    Specialization = ((Specialization)SpecializationComboBox.SelectedItem).ToString(),
+                    CabinetNumber = ((RoomNumber)RoomNumberComboBox.SelectedItem).ToString()
+                };
 
-            _doctorLogic.Update(updatedDoctor);
+                _doctorLogic.Update(updatedDoctor);
 
-            MessageBox.Show("Изменения успешно сохранены.", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
-            DialogResult = true;
+                MessageBox.Show("Изменения успешно сохранены.", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
+                DialogResult = true;
+            }
         }
     }
 }

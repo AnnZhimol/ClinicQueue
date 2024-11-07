@@ -44,6 +44,8 @@ namespace ClinicQueueView
             // Регистрация зависимостей
             services.AddTransient<IAdminStorage, AdminStorage>();
             services.AddTransient<IDoctorStorage, DoctorStorage>();
+            services.AddTransient<IScheduleStorage, ScheduleStorage>();
+            services.AddTransient<IScheduleLogic, ScheduleLogic>();
             services.AddTransient<IAdminLogic, AdminLogic>();
             services.AddTransient<IDoctorLogic, DoctorLogic>();
 
@@ -52,6 +54,7 @@ namespace ClinicQueueView
             services.AddTransient<AdminWindow>();
             services.AddTransient<AddDoctorWindow>();
             services.AddTransient<EditDoctorWindow>();
+            services.AddTransient<EditDoctorScheduleWindow>();
         }
     }
 }
