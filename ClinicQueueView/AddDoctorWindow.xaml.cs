@@ -105,7 +105,7 @@ namespace ClinicQueueView
             string? cabinet = ((RoomNumber)RoomNumberComboBox.SelectedItem).ToString();
             string? specialization = ((Specialization)SpecializationComboBox.SelectedItem).ToString();
 
-            if (string.IsNullOrEmpty(firstName) || string.IsNullOrEmpty(lastName) || string.IsNullOrEmpty(password) || cabinet == "Нет" || cabinet == "Нет")
+            if (string.IsNullOrEmpty(firstName) || string.IsNullOrEmpty(lastName) || string.IsNullOrEmpty(password) || cabinet == "Нет" || specialization == "Нет")
             {
                 MessageBox.Show("Пожалуйста, заполните все поля.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
