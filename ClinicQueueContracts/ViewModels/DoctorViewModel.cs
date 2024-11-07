@@ -9,7 +9,7 @@ namespace ClinicQueueContracts.ViewModels
         public string? Patronymic { get; set; } = string.Empty;
         public string Specialization { get; set; } = string.Empty;
         public string Password { get; set; } = string.Empty;
-        public int CabinetNumber { get; set; }
+        public string CabinetNumber { get; set; } = string.Empty;
         public int Id { get; set; }
     }
 }

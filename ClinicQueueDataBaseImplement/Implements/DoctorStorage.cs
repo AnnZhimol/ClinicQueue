@@ -24,7 +24,7 @@ namespace ClinicQueueDataBaseImplement.Implements
         public List<DoctorViewModel> GetAll()
         {
             using var context = new ClinicQueueDataBase();
-            return context.Doctors.Select(x => x.GetViewModel).ToList();
+            return context.Doctors.OrderBy(x => x.Surname).Select(x => x.GetViewModel).ToList();
         }
 
         public DoctorViewModel? GetElement(DoctorSearchModel model)
@@ -32,13 +32,16 @@ namespace ClinicQueueDataBaseImplement.Implements
             using var context = new ClinicQueueDataBase();
             if (model.Id.HasValue)
                 return context.Doctors.FirstOrDefault(x => x.Id == model.Id)?.GetViewModel;
+
             if (!string.IsNullOrEmpty(model.Name) && !string.IsNullOrEmpty(model.Surname)
                 && !string.IsNullOrEmpty(model.Patronymic) && !string.IsNullOrEmpty(model.Password))
                 return context.Doctors.FirstOrDefault(x => x.Name.Equals(model.Name) && x.Surname.Equals(model.Surname)
                 && x.Patronymic.Equals(model.Patronymic) && x.Password.Equals(model.Password))?.GetViewModel;
-            if (!string.IsNullOrEmpty(model.Name) && !string.IsNullOrEmpty(model.Surname) && !string.IsNullOrEmpty(model.Password))
+            
+            if (!string.IsNullOrEmpty(model.Name) && !string.IsNullOrEmpty(model.Surname)
+                && string.IsNullOrEmpty(model.Patronymic) && !string.IsNullOrEmpty(model.Password))
                 return context.Doctors.FirstOrDefault(x => x.Name.Equals(model.Name) && x.Surname.Equals(model.Surname)
-                && x.Password.Equals(model.Password))?.GetViewModel;
+                && x.Patronymic.Equals(model.Patronymic) && x.Password.Equals(model.Password))?.GetViewModel;
             return null;
         }
 

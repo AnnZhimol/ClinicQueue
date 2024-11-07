@@ -7,6 +7,6 @@
         string? Patronymic { get; }
         string Specialization { get; }
         string Password { get; }
-        int CabinetNumber { get; }
+        string CabinetNumber { get; }
     }
 }

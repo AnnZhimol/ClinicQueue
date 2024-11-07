@@ -64,7 +64,7 @@ namespace ClinicQueueBusinessLogic.BusinessLogic
 
         public List<DoctorViewModel>? ReadList(DoctorSearchModel? model)
         {
-            _logger.LogInformation("ReadElement. Name: {Name}. Surname: {Surname}. Patronymic: {Patronymic}. Id: {Id}.", model.Name, model.Surname, model.Patronymic, model.Id);
+            _logger.LogInformation("ReadElement. Name: {Name}. Surname: {Surname}. Patronymic: {Patronymic}. Id: {Id}.", model?.Name, model?.Surname, model?.Patronymic, model?.Id);
             var list = model == null ? _doctorStorage.GetAll() : _doctorStorage.GetFilteredAll(model);
             if (list == null)
             {

@@ -31,7 +31,7 @@ namespace ClinicQueueDataBaseImplement.Models
         public string Password { get; set; } = string.Empty;
         [Required]
         [DataMember]
-        public int CabinetNumber { get; set; }
+        public string CabinetNumber { get; set; } = string.Empty;
         [Key]
         [DataMember]
         public int Id { get; set; }
