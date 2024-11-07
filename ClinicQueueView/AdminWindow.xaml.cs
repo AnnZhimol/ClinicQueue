@@ -1,21 +1,10 @@
 ﻿using ClinicQueueContracts.BindingModels;
 using ClinicQueueContracts.BusinessLogicContracts;
-using ClinicQueueContracts.SearchModels;
 using ClinicQueueContracts.ViewModels;
 using ClinicQueueDataModels.Enums;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace ClinicQueueView
 {
@@ -24,14 +13,18 @@ namespace ClinicQueueView
         private readonly IAdminLogic _adminLogic;
         private readonly IDoctorLogic _doctorLogic;
         private readonly IScheduleLogic _scheduleLogic;
+        private readonly IElectronicQueueLogic _electronicQueueLogic;
+        private readonly IAppointmentLogic _appointmentLogic;
         private List<DoctorViewModel> _allDoctors;
         private readonly AdminViewModel _admin;
 
-        public AdminWindow(IAdminLogic adminLogic, IDoctorLogic doctorLogic, IScheduleLogic scheduleLogic, AdminViewModel admin)
+        public AdminWindow(IAdminLogic adminLogic, IDoctorLogic doctorLogic, IScheduleLogic scheduleLogic, IElectronicQueueLogic electronicQueueLogic, IAppointmentLogic appointmentLogic, AdminViewModel admin)
         {
             _adminLogic = adminLogic;
             _doctorLogic = doctorLogic;
             _scheduleLogic = scheduleLogic;
+            _electronicQueueLogic = electronicQueueLogic;
+            _appointmentLogic = appointmentLogic;
             _admin = admin;
             InitializeComponent();
             Loaded += AdminWindow_Loaded;
@@ -53,11 +46,13 @@ namespace ClinicQueueView
         {
         }
 
-        private void QueueButton_Click(object sender, RoutedEventArgs e)
+        private void QueueMenuItem_Click(object sender, RoutedEventArgs e)
         {
-            var queueWindow = new QueueWindow();
-            queueWindow.Show();
-            this.Close();
+            if (DoctorsListView.SelectedItem is DoctorViewModel selectedDoctor)
+            {
+                var queueWindow = new ElectronicQueueWindow(selectedDoctor, _admin, _electronicQueueLogic, _scheduleLogic, _appointmentLogic);
+                queueWindow.Show();
+            }
         }
 
         private void LogoutButton_Click(object sender, RoutedEventArgs e)
@@ -66,7 +61,7 @@ namespace ClinicQueueView
 
             if (result == MessageBoxResult.Yes)
             {
-                var mainWindow = new MainWindow(_adminLogic, _doctorLogic, _scheduleLogic);
+                var mainWindow = new MainWindow(_adminLogic, _doctorLogic, _scheduleLogic, _appointmentLogic, _electronicQueueLogic);
                 mainWindow.Show();
                 this.Close();
             }

@@ -2,7 +2,7 @@
 {
     public enum ElectronicQueueStatus
     {
-        isActive = 0,
-        Completed = 1
+        Активна = 0,
+        Завершена = 1
     }
 }

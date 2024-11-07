@@ -22,7 +22,7 @@ namespace ClinicQueueDataBaseImplement.Models
         public DateTime EndDate { get; set; }
         [Required]
         [DataMember]
-        public ElectronicQueueStatus Status { get; set; } = ElectronicQueueStatus.isActive;
+        public ElectronicQueueStatus Status { get; set; } = ElectronicQueueStatus.Активна;
         [Required]
         [DataMember]
         public int DoctorId { get; set; }

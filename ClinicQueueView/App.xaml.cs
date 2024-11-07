@@ -1,9 +1,8 @@
 ﻿using ClinicQueueBusinessLogic.BusinessLogic;
 using ClinicQueueContracts.BusinessLogicContracts;
 using ClinicQueueContracts.StoragesContracts;
-using ClinicQueueDataBaseImplement;
+using ClinicQueueContracts.ViewModels;
 using ClinicQueueDataBaseImplement.Implements;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using System;
@@ -38,23 +37,25 @@ namespace ClinicQueueView
 
         private static void ConfigureServices(ServiceCollection services)
         {
-            // Регистрация логирования
             services.AddLogging(configure => configure.AddConsole());
 
-            // Регистрация зависимостей
             services.AddTransient<IAdminStorage, AdminStorage>();
             services.AddTransient<IDoctorStorage, DoctorStorage>();
             services.AddTransient<IScheduleStorage, ScheduleStorage>();
+            services.AddTransient<IElectronicQueueStorage, ElectronicQueueStorage>();
+            services.AddTransient<IAppointmentStorage, AppointmentStorage>();
+            services.AddTransient<IAppointmentLogic, AppointmentLogic>();
+            services.AddTransient<IElectronicQueueLogic, ElectronicQueueLogic>();
             services.AddTransient<IScheduleLogic, ScheduleLogic>();
             services.AddTransient<IAdminLogic, AdminLogic>();
             services.AddTransient<IDoctorLogic, DoctorLogic>();
 
-            // Регистрация MainWindow с внедрением зависимостей
             services.AddTransient<MainWindow>();
             services.AddTransient<AdminWindow>();
             services.AddTransient<AddDoctorWindow>();
             services.AddTransient<EditDoctorWindow>();
             services.AddTransient<EditDoctorScheduleWindow>();
+            services.AddTransient<ElectronicQueueWindow>();
         }
     }
 }

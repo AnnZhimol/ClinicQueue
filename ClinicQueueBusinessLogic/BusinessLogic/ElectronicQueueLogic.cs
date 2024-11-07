@@ -26,7 +26,7 @@ namespace ClinicQueueBusinessLogic.BusinessLogic
                 throw new ArgumentNullException(nameof(model));
             }
 
-            model.Status = ElectronicQueueStatus.isActive;
+            model.Status = ElectronicQueueStatus.Активна;
             if (_electronicQueueStorage.Insert(model) == null)
             {
                 _logger.LogWarning("Insert operation failed");
@@ -50,13 +50,13 @@ namespace ClinicQueueBusinessLogic.BusinessLogic
                 return false;
             }
 
-            if (existingQueue.Status == ElectronicQueueStatus.Completed)
+            if (existingQueue.Status == ElectronicQueueStatus.Завершена)
             {
                 _logger.LogInformation("Electronic queue with Id: {Id} is already completed", model.Id);
                 return true;
             }
 
-            existingQueue.Status = ElectronicQueueStatus.Completed;
+            existingQueue.Status = ElectronicQueueStatus.Завершена;
             if (_electronicQueueStorage.Update(ConvertToBindingModel(existingQueue)) == null)
             {
                 _logger.LogWarning("Update operation failed for Id: {Id}", model.Id);
@@ -93,7 +93,7 @@ namespace ClinicQueueBusinessLogic.BusinessLogic
             if (list == null || list.Count == 0)
             {
                 _logger.LogWarning("No electronic queues found");
-                return null;
+                return new List<ElectronicQueueViewModel>();
             }
 
             _logger.LogInformation("Found {Count} electronic queues", list.Count);

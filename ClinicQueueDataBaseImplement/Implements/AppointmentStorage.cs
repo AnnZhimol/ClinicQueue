@@ -91,9 +91,10 @@ namespace ClinicQueueDataBaseImplement.Implements
                 queryWhere = context.Appointments.Where(x => x.PatientId == model.PatientId);
             }
 
-            else if (model.ElectronicQueueId.HasValue)
+            else if (model.ElectronicQueueId.HasValue && model.AppointmentStart != null)
             {
-                queryWhere = context.Appointments.Where(x => x.ElectronicQueueId == model.ElectronicQueueId);
+                var appointmentStartUtc = model.AppointmentStart.ToUniversalTime();
+                queryWhere = context.Appointments.Where(x => x.ElectronicQueueId == model.ElectronicQueueId && x.AppointmentStart >= appointmentStartUtc);
             }
 
             else
