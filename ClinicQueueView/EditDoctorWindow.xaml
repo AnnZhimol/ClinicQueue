@@ -1,8 +1,8 @@
-﻿<Window x:Class="ClinicQueueView.MainWindow"
+﻿<Window x:Class="ClinicQueueView.EditDoctorWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:local="clr-namespace:ClinicQueueView"
-        Title="MainWindow" Height="600" Width="500"
-        x:Name="MainWin">
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Изменить данные врача" Height="700" Width="500"
+        WindowStartupLocation="CenterScreen">
     <Window.Resources>
         <Style TargetType="TextBox">
             <Setter Property="Background" Value="White"/>
@@ -57,28 +57,27 @@
 
     <Grid>
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-            <TextBlock Text="Вход в систему" HorizontalAlignment="Center" FontSize="20" FontWeight="Bold" Foreground="#0277BD" Margin="0,0,0,0"/>
-
+            <TextBlock Text="Изменить данные врача" HorizontalAlignment="Center" FontSize="20" FontWeight="Bold" Foreground="#0277BD" Margin="0,0,0,20"/>
             <Label Content="Имя" HorizontalAlignment="Left" Margin="5,0,0,0"/>
-            <TextBox Name="FirstNameTextBox" Tag="Введите имя" Text="Введите имя" GotFocus="TextBox_GotFocus" LostFocus="TextBox_LostFocus" />
-
+            <TextBox Name="FirstNameTextBox" Tag="Введите имя" />
             <Label Content="Фамилия" HorizontalAlignment="Left" Margin="5,0,0,0"/>
-            <TextBox Name="LastNameTextBox" Tag="Введите фамилию" Text="Введите фамилию" GotFocus="TextBox_GotFocus" LostFocus="TextBox_LostFocus" />
-
+            <TextBox Name="LastNameTextBox" Tag="Введите фамилию" />
             <Label Content="Отчество" HorizontalAlignment="Left" Margin="5,0,0,0"/>
-            <TextBox Name="MiddleNameTextBox" Tag="Введите отчество" Text="Введите отчество" GotFocus="TextBox_GotFocus" LostFocus="TextBox_LostFocus" />
-
+            <TextBox Name="MiddleNameTextBox" Tag="Введите отчество" />
             <Label Content="Пароль" HorizontalAlignment="Left" Margin="5,0,0,0"/>
-            <PasswordBox Name="PasswordBox" Tag="Введите пароль" GotFocus="PasswordBox_GotFocus" LostFocus="PasswordBox_LostFocus" />
-
-            <Label Content="Роль" HorizontalAlignment="Left" Margin="5,0,0,0"/>
-            <ComboBox Name="RoleComboBox">
-                <ComboBoxItem Content="Выберите роль" IsSelected="True"/>
-                <ComboBoxItem Content="Врач"/>
-                <ComboBoxItem Content="Администратор"/>
+            <PasswordBox Name="PasswordBox" Tag="Введите пароль" />
+            <Label Content="Специализация" HorizontalAlignment="Left" Margin="5,0,0,0"/>
+            <ComboBox Name="SpecializationComboBox" Text="Специализация">
             </ComboBox>
 
-            <Button Content="Войти" Click="LoginButton_Click"/>
+            <Label Content="Кабинет" HorizontalAlignment="Left" Margin="5,0,0,0"/>
+            <ComboBox Name="RoomNumberComboBox" Text="Кабинет">
+            </ComboBox>
+
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,20,0,0">
+                <Button Content="Сохранить изменения" Click="SaveDoctorButton_Click" />
+                <Button Content="Отменить" Click="CancelButton_Click" />
+            </StackPanel>
         </StackPanel>
     </Grid>
 </Window>
