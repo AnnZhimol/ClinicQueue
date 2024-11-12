@@ -1,9 +1,11 @@
-﻿using ClinicQueueContracts.BindingModels;
+﻿using ClinicQueueBusinessLogic.BusinessLogic;
+using ClinicQueueContracts.BindingModels;
 using ClinicQueueContracts.BusinessLogicContracts;
 using ClinicQueueContracts.SearchModels;
 using ClinicQueueContracts.ViewModels;
 using ClinicQueueDataModels.Enums;
 using System.Windows;
+using System.Windows.Input;
 
 namespace ClinicQueueView
 {
@@ -84,7 +86,7 @@ namespace ClinicQueueView
 
                 foreach (var appointment in canceledAppointment)
                 {
-                    appointment.Status = AppointmentStatus.Canceled;
+                    appointment.Status = AppointmentStatus.Отменен;
                     _appointmentLogic.Update(ConvertToBindingModel(appointment));
                 }
                 activeQueue.Status = ElectronicQueueStatus.Завершена;
@@ -144,10 +146,59 @@ namespace ClinicQueueView
                         DoctorId = _doctor.Id,
                         ElectronicQueueId = queue.Id,
                         AppointmentStart = new DateTime(date.Year, date.Month, date.Day, schedule.Time.Hour, schedule.Time.Minute, 0).ToUniversalTime(),
-                        Status = AppointmentStatus.Created
+                        Status = AppointmentStatus.Создан
                     };
 
                     _appointmentLogic.Create(appointment);
+                }
+            }
+        }
+        private void QueueListView_MouseRightButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            if (QueueDataGrid.SelectedItem == null)
+            {
+                MessageBox.Show("Пожалуйста, выберите очередь для выполнения действия.", "Предупреждение", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+        }
+
+        private void StopQueue_Click(object sender, RoutedEventArgs e)
+        {
+            if (QueueDataGrid.SelectedItem is ElectronicQueueViewModel selectedQueue)
+            {
+                if (selectedQueue.Status == ElectronicQueueStatus.Завершена)
+                {
+                    MessageBox.Show("Эта очередь уже завершена.", "Предупреждение", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    return;
+                }
+
+                var result = MessageBox.Show($"Вы уверены, что хотите завершить очередь {selectedQueue.Name}?", "Подтверждение завершения", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+                if (result == MessageBoxResult.Yes)
+                {
+                    if (selectedQueue != null)
+                    {
+                        var canceledAppointment = _appointmentLogic.ReadList(new AppointmentSearchModel
+                        {
+                            ElectronicQueueId = selectedQueue.Id,
+                            AppointmentStart = DateTime.Now
+                        });
+
+                        foreach (var appointment in canceledAppointment)
+                        {
+                            appointment.Status = AppointmentStatus.Отменен;
+                            _appointmentLogic.Update(ConvertToBindingModel(appointment));
+                        }
+                        selectedQueue.Status = ElectronicQueueStatus.Завершена;
+
+                        var activeQueueBindingModel = ConvertToBindingModel(selectedQueue);
+                        if (activeQueueBindingModel != null)
+                        {
+                            _queueLogic.Update(activeQueueBindingModel);
+                        }
+                    }
+
+                    MessageBox.Show("Очередь завершена.");
+                    LoadQueues();
                 }
             }
         }

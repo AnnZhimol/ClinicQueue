@@ -23,8 +23,8 @@ namespace ClinicQueueView
 
             try
             {
-                var mainWindow = _serviceProvider.GetRequiredService<MainWindow>();
-                mainWindow.Show();
+                var startWindow = _serviceProvider.GetRequiredService<StartWindow>();
+                startWindow.Show();
             }
             catch (Exception ex)
             {
@@ -44,18 +44,23 @@ namespace ClinicQueueView
             services.AddTransient<IScheduleStorage, ScheduleStorage>();
             services.AddTransient<IElectronicQueueStorage, ElectronicQueueStorage>();
             services.AddTransient<IAppointmentStorage, AppointmentStorage>();
+            services.AddTransient<IPatientStorage, PatientStorage>();
+
+            services.AddTransient<IPatientLogic, PatientLogic>();
             services.AddTransient<IAppointmentLogic, AppointmentLogic>();
             services.AddTransient<IElectronicQueueLogic, ElectronicQueueLogic>();
             services.AddTransient<IScheduleLogic, ScheduleLogic>();
             services.AddTransient<IAdminLogic, AdminLogic>();
             services.AddTransient<IDoctorLogic, DoctorLogic>();
 
+            services.AddTransient<StartWindow>();
             services.AddTransient<MainWindow>();
             services.AddTransient<AdminWindow>();
             services.AddTransient<AddDoctorWindow>();
             services.AddTransient<EditDoctorWindow>();
             services.AddTransient<EditDoctorScheduleWindow>();
             services.AddTransient<ElectronicQueueWindow>();
+            services.AddTransient<DoctorLogic>();
         }
     }
 }
