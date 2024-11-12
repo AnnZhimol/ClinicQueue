@@ -1,27 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using ClinicQueueContracts.BusinessLogicContracts;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace ClinicQueueView
 {
-    /// <summary>
-    /// Логика взаимодействия для PatientWindow.xaml
-    /// </summary>
     public partial class PatientWindow : Window
     {
-        public PatientWindow()
+        private readonly IPatientLogic _patientLogic;
+        private readonly IDoctorLogic _doctorLogic;
+        private readonly IAppointmentLogic _appointmentLogic;
+        public PatientWindow(IPatientLogic patientLogic, IDoctorLogic doctorLogic, IAppointmentLogic appointmentLogic)
         {
+            _patientLogic = patientLogic;
             InitializeComponent();
+            _doctorLogic = doctorLogic;
+            _appointmentLogic = appointmentLogic;
+        }
+
+        private void StartButton_Click(object sender, RoutedEventArgs e)
+        {
+            AuthorizationPatient authorizationPatient = new AuthorizationPatient(_patientLogic, _appointmentLogic, _doctorLogic);
+            authorizationPatient.Show();
+            Close();
         }
     }
 }

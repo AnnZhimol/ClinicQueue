@@ -1,11 +1,11 @@
-﻿<Window x:Class="ClinicQueueView.PatientWindow"
+﻿<Window x:Class="ClinicQueueView.ReserveWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ClinicQueueView"
         mc:Ignorable="d"
-        Title="PatientWindow" Height="550" Width="800">
+        Title="ReserveWindow" Height="600" Width="800">
     <Window.Resources>
         <Style TargetType="TextBox">
             <Setter Property="Background" Value="White"/>
@@ -17,7 +17,6 @@
             <Setter Property="Height" Value="35"/>
             <Setter Property="FontSize" Value="14"/>
         </Style>
-
         <Style TargetType="PasswordBox">
             <Setter Property="Background" Value="White"/>
             <Setter Property="Foreground" Value="Gray"/>
@@ -28,7 +27,6 @@
             <Setter Property="Height" Value="35"/>
             <Setter Property="FontSize" Value="14"/>
         </Style>
-
         <Style TargetType="ComboBox">
             <Setter Property="Background" Value="White"/>
             <Setter Property="Foreground" Value="Gray"/>
@@ -38,7 +36,6 @@
             <Setter Property="Height" Value="30"/>
             <Setter Property="FontSize" Value="14"/>
         </Style>
-
         <Style TargetType="Button">
             <Setter Property="Background" Value="#03A9F4"/>
             <Setter Property="Foreground" Value="White"/>
@@ -51,7 +48,6 @@
             <Setter Property="Height" Value="40"/>
             <Setter Property="Width" Value="200"/>
         </Style>
-
         <Style TargetType="Window">
             <Setter Property="Foreground" Value="#0277BD"/>
             <Setter Property="FontSize" Value="16"/>
@@ -59,9 +55,40 @@
     </Window.Resources>
     <Grid>
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-            <TextBlock Text="Электронная очередь" HorizontalAlignment="Center" FontSize="20" FontWeight="Bold" Foreground="#0277BD" Margin="0,0,0,0"/>
+            <TextBlock Text="Записаться на прием к врачу" HorizontalAlignment="Center" FontSize="20" FontWeight="Bold" Foreground="#0277BD" Margin="0,0,0,0"/>
+            <Label Content="Выберите специализацию:" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="0,0,0,0" />
+            <ComboBox Name="SpecializationComboBox" VerticalAlignment="Top" HorizontalAlignment="Center" Width="650" SelectionChanged="OnSpecializationChanged" />
 
-            <Button Content="Начать" Click="StartButton_Click"/>
+            <Label Content="Выберите врача:" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="0,0,0,0" />
+            <ComboBox Name="DoctorComboBox" 
+                      VerticalAlignment="Top" 
+                      HorizontalAlignment="Center" 
+                      Width="650" 
+                      SelectionChanged="OnDoctorChanged" 
+                      IsEnabled="False">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding FullName}" />
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+
+
+            <Label Content="Выберите день приема:" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="0,0,0,0" />
+            <Calendar Name="AppointmentCalendar" VerticalAlignment="Top" DisplayDateStart="{Binding MinDate}" DisplayDateEnd="{Binding MaxDate}" SelectedDatesChanged="OnDateChanged" />
+
+            <Label Content="Выберите время приема:" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="0,0,0,0" />
+            <ComboBox Name="TimeSlotComboBox" 
+                      VerticalAlignment="Top" 
+                      HorizontalAlignment="Center" 
+                      Width="650" 
+                      IsEnabled="False" 
+                      SelectionChanged="OnTimeSlotSelected"/>
+
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,10,0,0">
+                <Button Name ="ReserveButton" Content="Записаться" VerticalAlignment="Top" HorizontalAlignment="Center" Width="300" Click="OnBookAppointmentClick" IsEnabled="False" />
+                <Button Content="Отменить" Click="CancelButton_Click" />
+            </StackPanel>
         </StackPanel>
     </Grid>
 </Window>

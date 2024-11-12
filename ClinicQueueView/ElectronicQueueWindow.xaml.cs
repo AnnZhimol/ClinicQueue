@@ -75,7 +75,11 @@ namespace ClinicQueueView
                 return;
             }
 
-            var activeQueue = _queueLogic.ReadList(new ElectronicQueueSearchModel { DoctorId = _doctor.Id, Status = ElectronicQueueStatus.Активна })?.FirstOrDefault();
+            var activeQueue = _queueLogic.ReadList(new ElectronicQueueSearchModel 
+            { 
+                DoctorId = _doctor.Id
+            })?.FirstOrDefault();
+
             if (activeQueue != null)
             {
                 var canceledAppointment = _appointmentLogic.ReadList(new AppointmentSearchModel
@@ -107,8 +111,8 @@ namespace ClinicQueueView
                 DoctorId = _doctor.Id,
                 AdminId = _admin.Id
             };
-            _queueLogic.Create(newQueue);
-            activeQueue = _queueLogic.ReadList(new ElectronicQueueSearchModel { DoctorId = _doctor.Id, Status = ElectronicQueueStatus.Активна })?.FirstOrDefault();
+
+            activeQueue = _queueLogic.Create(newQueue);
 
             CreateAppointments(activeQueue);
 

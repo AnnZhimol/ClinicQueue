@@ -60,7 +60,8 @@ namespace ClinicQueueView
             services.AddTransient<EditDoctorWindow>();
             services.AddTransient<EditDoctorScheduleWindow>();
             services.AddTransient<ElectronicQueueWindow>();
-            services.AddTransient<DoctorLogic>();
+            services.AddTransient<DoctorWindow>();
+            services.AddTransient<PatientWindow>();
         }
     }
 }

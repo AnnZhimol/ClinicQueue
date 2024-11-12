@@ -1,19 +1,5 @@
-﻿using ClinicQueueBusinessLogic.BusinessLogic;
-using ClinicQueueContracts.BusinessLogicContracts;
-using ClinicQueueDataBaseImplement.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using ClinicQueueContracts.BusinessLogicContracts;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace ClinicQueueView
 {
@@ -46,7 +32,10 @@ namespace ClinicQueueView
 
         private void PatientButton_Click(object sender, RoutedEventArgs e)
         {
-
+            MessageBox.Show("Запуск приложения для пациента.", "Вход", MessageBoxButton.OK, MessageBoxImage.Information);
+            PatientWindow patientWindow = new PatientWindow(_patientLogic, _doctorLogic, _appointmentLogic);
+            patientWindow.Show();
+            Close();
         }
     }
 }

@@ -8,7 +8,7 @@ namespace ClinicQueueContracts.BusinessLogicContracts
     {
         List<ElectronicQueueViewModel>? ReadList(ElectronicQueueSearchModel? model);
         ElectronicQueueViewModel? ReadElement(ElectronicQueueSearchModel model);
-        bool Create(ElectronicQueueBindingModel model);
+        ElectronicQueueViewModel? Create(ElectronicQueueBindingModel model);
         bool Update(ElectronicQueueBindingModel model);
         bool isCompleted(ElectronicQueueBindingModel model);
     }

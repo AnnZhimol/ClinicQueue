@@ -3,6 +3,7 @@ using ClinicQueueContracts.SearchModels;
 using ClinicQueueContracts.StoragesContracts;
 using ClinicQueueContracts.ViewModels;
 using ClinicQueueDataBaseImplement.Models;
+using ClinicQueueDataModels.Enums;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
