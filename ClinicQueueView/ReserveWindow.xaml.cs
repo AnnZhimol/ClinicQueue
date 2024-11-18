@@ -3,8 +3,12 @@ using ClinicQueueContracts.BusinessLogicContracts;
 using ClinicQueueContracts.SearchModels;
 using ClinicQueueContracts.ViewModels;
 using ClinicQueueDataModels.Enums;
+using System.Drawing;
 using System.Windows;
 using System.Windows.Controls;
+using static System.Net.Mime.MediaTypeNames;
+using System.Windows.Media;
+using System.Drawing.Printing;
 
 namespace ClinicQueueView
 {
@@ -13,6 +17,7 @@ namespace ClinicQueueView
         private readonly IDoctorLogic _doctorLogic;
         private readonly IAppointmentLogic _appointmentLogic;
         private readonly PatientViewModel _patient;
+        private string _printContent;
 
         public ReserveWindow(IDoctorLogic doctorLogic, IAppointmentLogic appointmentLogic, PatientViewModel patient)
         {
@@ -124,17 +129,17 @@ namespace ClinicQueueView
             string specialization = ((Specialization)SpecializationComboBox.SelectedItem).ToString();
             var doctor = (DoctorViewModel)DoctorComboBox.SelectedItem;
             DateTime appointmentDate = AppointmentCalendar.SelectedDate.Value.Date;
-            var timeSlot = TimeSlotComboBox.SelectedItem.ToString();
+            string timeSlot = TimeSlotComboBox.SelectedItem.ToString();
 
-            // Создаем объект DateTime с учетом выбранной даты и времени
-            DateTime selectedDateTime = DateTime.Parse($"{appointmentDate:yyyy-MM-dd} {timeSlot}");
+            DateTime localSelectedDateTime = DateTime.Parse($"{appointmentDate:yyyy-MM-dd} {timeSlot}");
 
-            // Пытаемся найти прием без преобразования в строку
+            DateTime utcSelectedDateTime = localSelectedDateTime.ToUniversalTime();
+
             var appointment = _appointmentLogic.ReadList(new AppointmentSearchModel
             {
                 DoctorId = doctor.Id
             })
-            .FirstOrDefault(a => a.AppointmentStart == selectedDateTime && a.Status == AppointmentStatus.Создан);
+            .FirstOrDefault(a => a.AppointmentStart == utcSelectedDateTime && a.Status == AppointmentStatus.Создан);
 
             if (appointment != null)
             {
@@ -146,7 +151,17 @@ namespace ClinicQueueView
 
                 _appointmentLogic.Update(ConvertToBindingModel(appointment));
 
-                MessageBox.Show($"Запись на прием успешна:\n\nСпециализация: {specialization}\nВрач: {doctor.FullName}\nКабинет: {doctor.CabinetNumber}\nДата: {appointmentDate:dd.MM.yyyy}\nВремя: {timeSlot}");
+                _printContent = $"Запись на прием успешна:\n\n" +
+                        $"Номер брони: {reservationNumber}\n" +
+                        $"Специализация: {specialization}\n" +
+                        $"Врач: {doctor.FullName}\n" +
+                        $"Кабинет: {doctor.CabinetNumber}\n" +
+                        $"Дата: {appointmentDate:dd.MM.yyyy}\n" +
+                        $"Время: {timeSlot}";
+
+                MessageBox.Show(_printContent);
+
+                PrintReceipt();
                 Close();
             }
             else
@@ -155,7 +170,34 @@ namespace ClinicQueueView
             }
         }
 
+        private void PrintReceipt()
+        {
+            PrintDocument printDocument = new PrintDocument();
+            printDocument.PrintPage += PrintDocument_PrintPage;
 
+            try
+            {
+                PrintDialog printDialog = new PrintDialog();
+                if (printDialog.ShowDialog() == true)
+                {
+                    printDocument.Print();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка печати: {ex.Message}");
+            }
+        }
+
+        private void PrintDocument_PrintPage(object sender, PrintPageEventArgs e)
+        {
+                e.Graphics.DrawString(
+                _printContent,
+                new System.Drawing.Font("Arial", 12),
+                System.Drawing.Brushes.Black,
+                new RectangleF(10, 10, e.PageBounds.Width - 20, e.PageBounds.Height - 20)
+            );
+        }
 
         public AppointmentBindingModel ConvertToBindingModel(AppointmentViewModel appointmentViewModel)
         {

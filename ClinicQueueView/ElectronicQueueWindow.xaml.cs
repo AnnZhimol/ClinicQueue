@@ -90,7 +90,8 @@ namespace ClinicQueueView
 
                 foreach (var appointment in canceledAppointment)
                 {
-                    appointment.Status = AppointmentStatus.Отменен;
+                    if(appointment.Status == AppointmentStatus.Создан)
+                        appointment.Status = AppointmentStatus.Отменен;
                     _appointmentLogic.Update(ConvertToBindingModel(appointment));
                 }
                 activeQueue.Status = ElectronicQueueStatus.Завершена;
@@ -189,7 +190,8 @@ namespace ClinicQueueView
 
                         foreach (var appointment in canceledAppointment)
                         {
-                            appointment.Status = AppointmentStatus.Отменен;
+                            if (appointment.Status == AppointmentStatus.Создан)
+                                appointment.Status = AppointmentStatus.Отменен;
                             _appointmentLogic.Update(ConvertToBindingModel(appointment));
                         }
                         selectedQueue.Status = ElectronicQueueStatus.Завершена;
