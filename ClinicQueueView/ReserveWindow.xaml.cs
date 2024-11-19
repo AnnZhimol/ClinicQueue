@@ -198,7 +198,9 @@ namespace ClinicQueueView
                 MessageBox.Show(_printContent);
 
                 PrintReceipt();
-                Close();
+                PatientWindow patientWindow = new PatientWindow(_patientLogic, _doctorLogic, _appointmentLogic);
+                patientWindow.Show();
+                this.Close();
             }
             else
             {
