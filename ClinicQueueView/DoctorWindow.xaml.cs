@@ -1,8 +1,10 @@
 ﻿using ClinicQueueBusinessLogic.BusinessLogic;
+using ClinicQueueContracts.BindingModels;
 using ClinicQueueContracts.BusinessLogicContracts;
 using ClinicQueueContracts.SearchModels;
 using ClinicQueueContracts.ViewModels;
 using ClinicQueueDataModels.Enums;
+using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -49,7 +51,11 @@ namespace ClinicQueueView
             PatientsListView.ItemsSource = _allAppointments = _appointmentLogic.ReadList(new AppointmentSearchModel
             {
                 DoctorId = _doctor.Id,
-            });
+            }).Where(x => !string.IsNullOrEmpty(x.PatientFIO)).Select(appointment =>
+            {
+                appointment.AppointmentStart = appointment.AppointmentStart.ToLocalTime();
+                return appointment;
+            }).ToList();
         }
 
         private void LogoutButton_Click(object sender, RoutedEventArgs e)
@@ -64,14 +70,70 @@ namespace ClinicQueueView
             }
         }
 
+        public AppointmentBindingModel ConvertToBindingModel(AppointmentViewModel appointmentViewModel)
+        {
+            if (appointmentViewModel == null)
+            {
+                throw new ArgumentNullException(nameof(appointmentViewModel));
+            }
+
+            return new AppointmentBindingModel
+            {
+                Id = appointmentViewModel.Id,
+                DoctorId = appointmentViewModel.DoctorId,
+                AppointmentStart = appointmentViewModel.AppointmentStart,
+                Status = appointmentViewModel.Status,
+                PatientId = appointmentViewModel.PatientId,
+                ReservationNumber = appointmentViewModel.ReservationNumber,
+                ElectronicQueueId = appointmentViewModel.ElectronicQueueId
+            };
+        }
+
         private void StartAppointment_Click(object sender, RoutedEventArgs e)
         {
+            if (PatientsListView.SelectedItem is AppointmentViewModel selectedPatient)
+            {
+                if (selectedPatient.Status != AppointmentStatus.Ожидание)
+                {
+                    MessageBox.Show("Пожалуйста, выберите пациента со статусом 'Ожидание'.", "Предупреждение", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    return;
+                }
 
+                var result = MessageBox.Show($"Вы уверены, что хотите начать прием c {selectedPatient.PatientFIO}?", "Подтверждение начала", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+                if (result == MessageBoxResult.Yes)
+                {
+                    _appointmentLogic.inProcessing(ConvertToBindingModel(selectedPatient));
+                    var result2 = MessageBox.Show($"Прием с пациентом {selectedPatient.PatientFIO} начат. Чтобы завершить прием, нажмите ОК", "Прием", MessageBoxButton.OK, MessageBoxImage.Question);
+                    if (result2 == MessageBoxResult.OK)
+                    {
+                        _appointmentLogic.isCompleted(ConvertToBindingModel(selectedPatient));
+                    }
+                    LoadPatients();
+                }
+            }
         }
 
         private void StopMenuItem_Click(object sender, RoutedEventArgs e)
         {
+            if (PatientsListView.SelectedItem is AppointmentViewModel selectedPatient)
+            {
+                if (selectedPatient.Status != AppointmentStatus.Ожидание)
+                {
+                    MessageBox.Show("Пожалуйста, выберите пациента со статусом 'Ожидание'.", "Предупреждение", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    return;
+                }
 
+                var result = MessageBox.Show($"Вы уверены, что хотите отменить прием c {selectedPatient.PatientFIO}?", "Подтверждение отмены", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+                if (result == MessageBoxResult.Yes)
+                {
+                    _appointmentLogic.inProcessing(ConvertToBindingModel(selectedPatient));
+                    var result2 = MessageBox.Show($"Прием с пациентом {selectedPatient.PatientFIO} отменен.", "Отмена", MessageBoxButton.OK, MessageBoxImage.Information);
+                    _appointmentLogic.CancelAppointment(ConvertToBindingModel(selectedPatient));
+                    LoadPatients();
+                }
+            }
         }
 
         private void UpdateDoctorsList()
