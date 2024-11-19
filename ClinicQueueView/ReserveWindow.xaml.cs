@@ -9,6 +9,9 @@ using System.Windows.Controls;
 using static System.Net.Mime.MediaTypeNames;
 using System.Windows.Media;
 using System.Drawing.Printing;
+using static System.Runtime.InteropServices.JavaScript.JSType;
+using System.Windows.Threading;
+using ClinicQueueBusinessLogic.BusinessLogic;
 
 namespace ClinicQueueView
 {
@@ -16,17 +19,50 @@ namespace ClinicQueueView
     {
         private readonly IDoctorLogic _doctorLogic;
         private readonly IAppointmentLogic _appointmentLogic;
+        private readonly IPatientLogic _patientLogic;
         private readonly PatientViewModel _patient;
         private string _printContent;
 
-        public ReserveWindow(IDoctorLogic doctorLogic, IAppointmentLogic appointmentLogic, PatientViewModel patient)
+        private readonly DispatcherTimer _inactivityTimer;
+
+        public ReserveWindow(IPatientLogic patientLogic,IDoctorLogic doctorLogic, IAppointmentLogic appointmentLogic, PatientViewModel patient)
         {
             _appointmentLogic = appointmentLogic;
             _doctorLogic = doctorLogic;
             _patient = patient;
+            _patientLogic = patientLogic;
             InitializeComponent();
             SpecializationComboBox.ItemsSource = Enum.GetValues(typeof(Specialization));
             TimeSlotComboBox.SelectionChanged += OnTimeSlotSelected;
+
+            _inactivityTimer = new DispatcherTimer
+            {
+                Interval = TimeSpan.FromMinutes(1)
+            };
+            _inactivityTimer.Tick += OnInactivityTimeout;
+            ResetInactivityTimer();
+
+            this.MouseMove += OnUserActivity;
+            this.KeyDown += OnUserActivity;
+        }
+
+        private void OnUserActivity(object sender, EventArgs e)
+        {
+            ResetInactivityTimer();
+        }
+
+        private void ResetInactivityTimer()
+        {
+            _inactivityTimer.Stop();
+            _inactivityTimer.Start();
+        }
+
+        private void OnInactivityTimeout(object? sender, EventArgs e)
+        {
+            _inactivityTimer.Stop();
+            PatientWindow patientWindow = new PatientWindow(_patientLogic, _doctorLogic, _appointmentLogic);
+            patientWindow.Show();
+            this.Close();
         }
 
         private void OnSpecializationChanged(object sender, SelectionChangedEventArgs e)
@@ -78,6 +114,7 @@ namespace ClinicQueueView
                 }).Where(a => a.Status == AppointmentStatus.Создан).ToList();
 
                 var availableDates = appointments.Select(a => a.AppointmentStart.Date).Distinct().ToList();
+                AppointmentCalendar.BlackoutDates.Add(new CalendarDateRange(DateTime.Today));
 
                 for (var date = DateTime.Today; date <= AppointmentCalendar.DisplayDateEnd; date = date.AddDays(1))
                 {
@@ -151,11 +188,10 @@ namespace ClinicQueueView
 
                 _appointmentLogic.Update(ConvertToBindingModel(appointment));
 
-                _printContent = $"Запись на прием успешна:\n\n" +
+                _printContent = $"Запись на прием успешна.\nЧтобы попасть на прием, необходимо\nзарегистрироваться в электронной очереди\n за 10 минут до начала приема. \nВ противном случае, прием будет отменен.\nДля регистрации потребуется номер брони.\n\n" +
                         $"Номер брони: {reservationNumber}\n" +
                         $"Специализация: {specialization}\n" +
                         $"Врач: {doctor.FullName}\n" +
-                        $"Кабинет: {doctor.CabinetNumber}\n" +
                         $"Дата: {appointmentDate:dd.MM.yyyy}\n" +
                         $"Время: {timeSlot}";
 

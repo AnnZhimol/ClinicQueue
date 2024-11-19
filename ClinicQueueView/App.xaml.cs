@@ -62,6 +62,7 @@ namespace ClinicQueueView
             services.AddTransient<ElectronicQueueWindow>();
             services.AddTransient<DoctorWindow>();
             services.AddTransient<PatientWindow>();
+            services.AddTransient<RegistrationPatientQueue>();
         }
     }
 }

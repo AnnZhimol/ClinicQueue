@@ -1,15 +1,10 @@
 ﻿using ClinicQueueContracts.BusinessLogicContracts;
 using ClinicQueueContracts.SearchModels;
 using ClinicQueueContracts.ViewModels;
-using ClinicQueueDataBaseImplement.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using System.Windows.Threading;
 
 namespace ClinicQueueView
 {
@@ -19,12 +14,42 @@ namespace ClinicQueueView
         private readonly IAppointmentLogic _appointmentLogic;
         private readonly IDoctorLogic _doctorLogic;
 
+        private readonly DispatcherTimer _inactivityTimer;
+
         public AuthorizationPatient(IPatientLogic patientLogic, IAppointmentLogic appointmentLogic, IDoctorLogic doctorLogic)
         {
             _patientLogic = patientLogic;
             InitializeComponent();
             _appointmentLogic = appointmentLogic;
             _doctorLogic = doctorLogic;
+
+            _inactivityTimer = new DispatcherTimer
+            {
+                Interval = TimeSpan.FromMinutes(1)
+            };
+            _inactivityTimer.Tick += OnInactivityTimeout;
+            ResetInactivityTimer();
+
+            this.MouseMove += OnUserActivity;
+            this.KeyDown += OnUserActivity;
+        }
+        private void OnUserActivity(object sender, EventArgs e)
+        {
+            ResetInactivityTimer();
+        }
+
+        private void ResetInactivityTimer()
+        {
+            _inactivityTimer.Stop();
+            _inactivityTimer.Start();
+        }
+
+        private void OnInactivityTimeout(object? sender, EventArgs e)
+        {
+            _inactivityTimer.Stop();
+            PatientWindow patientWindow = new PatientWindow(_patientLogic, _doctorLogic, _appointmentLogic);
+            patientWindow.Show();
+            this.Close();
         }
 
         private void TextBox_GotFocus(object sender, RoutedEventArgs e)
