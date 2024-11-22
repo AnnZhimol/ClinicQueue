@@ -59,7 +59,6 @@ namespace ClinicQueueBusinessLogic.BusinessLogic
 
         public List<AdminViewModel>? ReadList(AdminSearchModel? model)
         {
-            _logger.LogInformation("ReadElement. Name: {Name}. Surname: {Surname}. Patronymic: {Patronymic}. Id: {Id}.", model.Name, model.Surname, model.Patronymic, model.Id);
             var list = model == null ? _adminStorage.GetAll() : _adminStorage.GetFilteredAll(model);
             if (list == null)
             {

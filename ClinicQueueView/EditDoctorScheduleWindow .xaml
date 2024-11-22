@@ -70,7 +70,6 @@
             <Setter Property="Margin" Value="0,10,0,20"/>
         </Style>
 
-        <!-- Стили для Window -->
         <Style TargetType="Window">
             <Setter Property="Foreground" Value="#0277BD"/>
             <Setter Property="FontSize" Value="16"/>
@@ -80,7 +79,6 @@
     <Grid Margin="10">
         <StackPanel>
             <TextBlock Name="DoctorEditSchedule" TextAlignment="Center" FontSize="20" FontWeight="Bold" Foreground="#0277BD" Margin="0,0,0,20" HorizontalAlignment="Center"/>
-            <!-- Горизонтальное расположение дней недели с их интервалами -->
             <ScrollViewer HorizontalScrollBarVisibility="Auto">
                 <StackPanel Orientation="Horizontal">
                     <ItemsControl Name="DaysOfWeekControl">
@@ -98,7 +96,6 @@
                                         <ItemsControl ItemsSource="{Binding Intervals}">
                                             <ItemsControl.ItemTemplate>
                                                 <DataTemplate>
-                                                    <!-- Привязка состояния IsChecked к свойству для сбора данных -->
                                                     <CheckBox Content="{Binding Time}" IsChecked="{Binding IsSelected}" HorizontalAlignment="Center" />
                                                 </DataTemplate>
                                             </ItemsControl.ItemTemplate>
@@ -111,7 +108,7 @@
                 </StackPanel>
             </ScrollViewer>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,20,0,0">
-                <Button Content="Сохранить" Click="SaveScheduleButton_Click"/>
+                <Button Name="SaveScheduleButton" Content="Сохранить" Click="SaveScheduleButton_Click"/>
                 <Button Content="Отменить" Click="CancelButton_Click" />
             </StackPanel>
         </StackPanel>

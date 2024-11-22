@@ -78,7 +78,7 @@
                 <ComboBoxItem Content="Администратор"/>
             </ComboBox>
 
-            <Button Content="Войти" Click="LoginButton_Click"/>
+            <Button Name="LoginButton" Content="Войти" Click="LoginButton_Click"/>
         </StackPanel>
     </Grid>
 </Window>
