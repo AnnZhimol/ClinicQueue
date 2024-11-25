@@ -59,9 +59,9 @@
     </Window.Resources>
     <Grid>
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-            <Button Content="Записаться на прием к врачу" Width="350" Click="ReserveButton_Click"/>
-            <Button Content="Зарегистрироваться в электронной очереди" Width="350" Click="RegisterButton_Click"/>
-            <Button Content="Выйти" Width="350" Click="LogOutButton_Click"/>
+            <Button Name="ReserveButton" Content="Записаться на прием к врачу" Width="350" Click="ReserveButton_Click"/>
+            <Button Name="RegisterButton" Content="Зарегистрироваться в электронной очереди" Width="350" Click="RegisterButton_Click"/>
+            <Button Name="LogoutButton" Content="Выйти" Width="350" Click="LogOutButton_Click"/>
         </StackPanel>
 
     </Grid>

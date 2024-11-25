@@ -62,9 +62,11 @@ namespace ClinicQueueView
                 return;
             }
 
-            if (string.IsNullOrEmpty(MiddleNameTextBox.Text) || MiddleNameTextBox.Text == "Введите отчество")
+            string? middleName = MiddleNameTextBox.Text;
+
+            if (string.IsNullOrEmpty(middleName) || middleName == "Введите отчество")
             {
-                MiddleNameTextBox.Text = null;
+                middleName = null;
             }
 
             if (result == MessageBoxResult.Yes)
@@ -74,7 +76,7 @@ namespace ClinicQueueView
                     Id = _doctor.Id,
                     Name = FirstNameTextBox.Text,
                     Surname = LastNameTextBox.Text,
-                    Patronymic = MiddleNameTextBox.Text,
+                    Patronymic = middleName,
                     Password = PasswordBox.Password,
                     Specialization = ((Specialization)SpecializationComboBox.SelectedItem).ToString(),
                     CabinetNumber = ((RoomNumber)RoomNumberComboBox.SelectedItem).ToString()

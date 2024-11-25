@@ -76,11 +76,6 @@ namespace ClinicQueueView
             if (SpecializationComboBox.SelectedItem != null)
             {
                 var selectedSpecialization = ((Specialization)SpecializationComboBox.SelectedItem).ToString();
-                if (selectedSpecialization == "Нет")
-                {
-                    MessageBox.Show("Пожалуйста, выберите специализацию.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
-                    return;
-                }
 
                 var doctors = _doctorLogic.ReadList(new DoctorSearchModel
                 {
@@ -90,6 +85,7 @@ namespace ClinicQueueView
                 DoctorComboBox.ItemsSource = doctors;
                 DoctorComboBox.IsEnabled = true;
             }
+
             UpdateBookAppointmentButtonState();
         }
 
@@ -258,6 +254,9 @@ namespace ClinicQueueView
 
         private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
+            _inactivityTimer.Stop();
+            PatientWindow patientWindow = new PatientWindow(_patientLogic, _doctorLogic, _appointmentLogic);
+            patientWindow.Show();
             this.Close();
         }
 
