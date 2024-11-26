@@ -74,7 +74,7 @@
             </ComboBox>
 
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,20,0,0">
-                <Button Content="Добавить" Click="SaveDoctorButton_Click" />
+                <Button Name="SaveDoctorButton" Content="Добавить" Click="SaveDoctorButton_Click" />
                 <Button Content="Отменить" Click="CancelButton_Click" />
             </StackPanel>
         </StackPanel>

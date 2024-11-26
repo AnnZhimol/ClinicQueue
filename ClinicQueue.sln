@@ -3,15 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.11.35327.3
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClinicQueueDataBaseImplement", "ClinicQueueDataBaseImplement\ClinicQueueDataBaseImplement.csproj", "{A58EF139-ABED-4E32-A5D8-18B91FBD1BC4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClinicQueueDataBaseImplement", "ClinicQueueDataBaseImplement\ClinicQueueDataBaseImplement.csproj", "{A58EF139-ABED-4E32-A5D8-18B91FBD1BC4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClinicQueueView", "ClinicQueueView\ClinicQueueView.csproj", "{EF9C2374-9B0C-4286-BF83-0AA407FBC72E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClinicQueueView", "ClinicQueueView\ClinicQueueView.csproj", "{EF9C2374-9B0C-4286-BF83-0AA407FBC72E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClinicQueueDataModels", "ClinicQueueDataModels\ClinicQueueDataModels.csproj", "{B1AF23C1-13D5-4CFE-8C78-C728214BBD7F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClinicQueueDataModels", "ClinicQueueDataModels\ClinicQueueDataModels.csproj", "{B1AF23C1-13D5-4CFE-8C78-C728214BBD7F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClinicQueueContracts", "ClinicQueueContracts\ClinicQueueContracts.csproj", "{6BC048AD-B5ED-4211-93FD-839A2D182839}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClinicQueueContracts", "ClinicQueueContracts\ClinicQueueContracts.csproj", "{6BC048AD-B5ED-4211-93FD-839A2D182839}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClinicQueueBusinessLogic", "ClinicQueueBusinessLogic\ClinicQueueBusinessLogic.csproj", "{536A1273-8EA1-4618-BCA9-9F3023BDCD74}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClinicQueueBusinessLogic", "ClinicQueueBusinessLogic\ClinicQueueBusinessLogic.csproj", "{536A1273-8EA1-4618-BCA9-9F3023BDCD74}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClinicQueueTest", "ClinicQueueTest\ClinicQueueTest.csproj", "{E370F8B5-8B68-4934-83BF-32953E427A59}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{536A1273-8EA1-4618-BCA9-9F3023BDCD74}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{536A1273-8EA1-4618-BCA9-9F3023BDCD74}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{536A1273-8EA1-4618-BCA9-9F3023BDCD74}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E370F8B5-8B68-4934-83BF-32953E427A59}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E370F8B5-8B68-4934-83BF-32953E427A59}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E370F8B5-8B68-4934-83BF-32953E427A59}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E370F8B5-8B68-4934-83BF-32953E427A59}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
