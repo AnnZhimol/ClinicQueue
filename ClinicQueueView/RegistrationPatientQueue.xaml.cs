@@ -131,6 +131,13 @@ namespace ClinicQueueView
             } 
             else MessageBox.Show("Прием с данным номером брони не найден", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
         }
+        private void CancelButton_Click(object sender, RoutedEventArgs e)
+        {
+            _inactivityTimer.Stop();
+            PatientWindow patientWindow = new PatientWindow(_patientLogic, _doctorLogic, _appointmentLogic);
+            patientWindow.Show();
+            this.Close();
+        }
 
         public AppointmentBindingModel ConvertToBindingModel(AppointmentViewModel appointmentViewModel)
         {
