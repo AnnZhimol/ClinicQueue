@@ -1,10 +1,8 @@
-﻿using ClinicQueueBusinessLogic.BusinessLogic;
-using ClinicQueueContracts.BindingModels;
+﻿using ClinicQueueContracts.BindingModels;
 using ClinicQueueContracts.BusinessLogicContracts;
 using ClinicQueueContracts.SearchModels;
 using ClinicQueueContracts.ViewModels;
 using ClinicQueueDataModels.Enums;
-using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;

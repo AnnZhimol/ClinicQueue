@@ -3,11 +3,6 @@ using ClinicQueueContracts.SearchModels;
 using ClinicQueueContracts.StoragesContracts;
 using ClinicQueueContracts.ViewModels;
 using ClinicQueueDataBaseImplement.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ClinicQueueDataBaseImplement.Implements
 {

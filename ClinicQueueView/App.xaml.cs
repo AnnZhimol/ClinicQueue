@@ -1,11 +1,9 @@
 ﻿using ClinicQueueBusinessLogic.BusinessLogic;
 using ClinicQueueContracts.BusinessLogicContracts;
 using ClinicQueueContracts.StoragesContracts;
-using ClinicQueueContracts.ViewModels;
 using ClinicQueueDataBaseImplement.Implements;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using System;
 using System.Windows;
 
 namespace ClinicQueueView

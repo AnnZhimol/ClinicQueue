@@ -4,14 +4,10 @@ using ClinicQueueContracts.SearchModels;
 using ClinicQueueContracts.ViewModels;
 using ClinicQueueDataModels.Enums;
 using System.Drawing;
+using System.Drawing.Printing;
 using System.Windows;
 using System.Windows.Controls;
-using static System.Net.Mime.MediaTypeNames;
-using System.Windows.Media;
-using System.Drawing.Printing;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 using System.Windows.Threading;
-using ClinicQueueBusinessLogic.BusinessLogic;
 
 namespace ClinicQueueView
 {

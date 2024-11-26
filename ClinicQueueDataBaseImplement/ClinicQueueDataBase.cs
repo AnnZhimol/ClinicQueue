@@ -1,6 +1,5 @@
 ﻿using ClinicQueueDataBaseImplement.Models;
 using Microsoft.EntityFrameworkCore;
-using System.ComponentModel;
 
 namespace ClinicQueueDataBaseImplement
 {

@@ -4,12 +4,7 @@ using ClinicQueueContracts.SearchModels;
 using ClinicQueueContracts.StoragesContracts;
 using ClinicQueueContracts.ViewModels;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 
 namespace ClinicQueueBusinessLogic.BusinessLogic
 {

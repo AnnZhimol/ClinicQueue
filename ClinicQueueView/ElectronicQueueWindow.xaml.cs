@@ -1,5 +1,4 @@
-﻿using ClinicQueueBusinessLogic.BusinessLogic;
-using ClinicQueueContracts.BindingModels;
+﻿using ClinicQueueContracts.BindingModels;
 using ClinicQueueContracts.BusinessLogicContracts;
 using ClinicQueueContracts.SearchModels;
 using ClinicQueueContracts.ViewModels;

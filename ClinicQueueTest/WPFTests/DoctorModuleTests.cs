@@ -1,15 +1,10 @@
-﻿using FlaUI.Core.Tools;
-using FlaUI.Core.WindowsAPI;
-using FlaUI.Core;
-using FlaUI.UIA3;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Xunit;
+﻿using FlaUI.Core;
 using FlaUI.Core.AutomationElements;
 using FlaUI.Core.Input;
+using FlaUI.Core.Tools;
+using FlaUI.Core.WindowsAPI;
+using FlaUI.UIA3;
+using Xunit;
 
 namespace ClinicQueueTest.WPFTests
 {
