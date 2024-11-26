@@ -104,7 +104,7 @@ namespace ClinicQueueView
                 if (result == MessageBoxResult.Yes)
                 {
                     _appointmentLogic.inProcessing(ConvertToBindingModel(selectedPatient));
-                    var result2 = MessageBox.Show($"Прием с пациентом {selectedPatient.PatientFIO} начат. Чтобы завершить прием, нажмите ОК", "Прием", MessageBoxButton.OK, MessageBoxImage.Question);
+                    var result2 = MessageBox.Show($"Прием с пациентом {selectedPatient.PatientFIO}начат. Чтобы завершить прием, нажмите ОК", "Прием", MessageBoxButton.OK, MessageBoxImage.Question);
                     if (result2 == MessageBoxResult.OK)
                     {
                         _appointmentLogic.isCompleted(ConvertToBindingModel(selectedPatient));
