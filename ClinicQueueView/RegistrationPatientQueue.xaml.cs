@@ -124,6 +124,7 @@ namespace ClinicQueueView
 
                 MessageBox.Show(_printContent);
                 PrintReceipt();
+                _inactivityTimer.Stop();
                 PatientWindow patientWindow = new PatientWindow(_patientLogic, _doctorLogic, _appointmentLogic);
                 patientWindow.Show();
                 this.Close();

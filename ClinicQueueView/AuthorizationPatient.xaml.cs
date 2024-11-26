@@ -78,6 +78,7 @@ namespace ClinicQueueView
 
         private void LogOutButton_Click(object sender, RoutedEventArgs e)
         {
+            _inactivityTimer.Stop();
             PatientWindow patientWindow = new PatientWindow(_patientLogic, _doctorLogic, _appointmentLogic);
             patientWindow.Show();
             this.Close();
@@ -115,6 +116,7 @@ namespace ClinicQueueView
 
                 if (patient != null)
                 {
+                    _inactivityTimer.Stop();
                     PatientMainWindow patientMainWindow = new PatientMainWindow(_patientLogic, patient, _doctorLogic, _appointmentLogic);
                     patientMainWindow.Show();
                     Close();
@@ -136,6 +138,7 @@ namespace ClinicQueueView
 
                 if (patient != null)
                 {
+                    _inactivityTimer.Stop();
                     PatientMainWindow patientMainWindow = new PatientMainWindow(_patientLogic, patient, _doctorLogic, _appointmentLogic);
                     patientMainWindow.Show();
                     Close();

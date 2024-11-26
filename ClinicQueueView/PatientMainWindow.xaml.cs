@@ -53,6 +53,7 @@ namespace ClinicQueueView
 
         private void ReserveButton_Click(object sender, RoutedEventArgs e) 
         {
+            _inactivityTimer.Stop();
             ReserveWindow reserveWindow = new ReserveWindow(_patientLogic, _doctorLogic, _appointmentLogic, _patient);
             reserveWindow.Show();
             this.Close();
@@ -60,6 +61,7 @@ namespace ClinicQueueView
 
         private void RegisterButton_Click(object sender, RoutedEventArgs e)
         {
+            _inactivityTimer.Stop();
             RegistrationPatientQueue regWindow = new RegistrationPatientQueue(_patientLogic, _patient, _doctorLogic, _appointmentLogic);
             regWindow.Show();
             this.Close();
@@ -67,6 +69,7 @@ namespace ClinicQueueView
 
         private void LogOutButton_Click(object sender, RoutedEventArgs e)
         {
+            _inactivityTimer.Stop();
             PatientWindow patientWindow = new PatientWindow(_patientLogic, _doctorLogic, _appointmentLogic);
             patientWindow.Show();
             this.Close();
