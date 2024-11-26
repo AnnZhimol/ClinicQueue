@@ -99,6 +99,7 @@
                         <GridView>
                             <GridViewColumn Header="ФИО" Width="200" DisplayMemberBinding="{Binding PatientFIO}"/>
                             <GridViewColumn Header="Статус" Width="200" DisplayMemberBinding="{Binding Status}"/>
+                            <GridViewColumn Header="Начало приема" Width="200" DisplayMemberBinding="{Binding AppointmentStart, StringFormat='{}{0:dd.MM.yyyy HH:mm}'}"/>
                         </GridView>
                     </ListView.View>
                 </ListView>

@@ -80,7 +80,7 @@
             <Label Content="Номер документа:" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="5,0,0,0" />
             <TextBox Name="DocumentNumberTextBox" VerticalAlignment="Top" HorizontalAlignment="Left" Width="200" Tag="Введите номер документа" Text="Введите номер документа" GotFocus="TextBox_GotFocus" LostFocus="TextBox_LostFocus"/>
 
-            <Button Content="Войти" VerticalAlignment="Top" HorizontalAlignment="Center" Width="200" Margin="5,10,0,0" Click="LoginButton_Click" />
+            <Button Name="EntryButton" Content="Войти" VerticalAlignment="Top" HorizontalAlignment="Center" Width="200" Margin="5,10,0,0" Click="LoginButton_Click" />
             <Button Content="Отмена" VerticalAlignment="Top" HorizontalAlignment="Center" Width="200" Margin="5,10,0,0" Click="LogOutButton_Click" />
         </StackPanel>
     </Grid>

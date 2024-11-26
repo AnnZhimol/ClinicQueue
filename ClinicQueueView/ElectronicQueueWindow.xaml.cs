@@ -78,7 +78,7 @@ namespace ClinicQueueView
             var activeQueue = _queueLogic.ReadList(new ElectronicQueueSearchModel 
             { 
                 DoctorId = _doctor.Id
-            })?.FirstOrDefault();
+            })?.Where(x=>x.Status == ElectronicQueueStatus.Активна).FirstOrDefault();
 
             if (activeQueue != null)
             {
@@ -236,6 +236,8 @@ namespace ClinicQueueView
                 Id = viewModel.Id,
                 AppointmentStart = viewModel.AppointmentStart,
                 Status = viewModel.Status,
+                PatientId = viewModel.PatientId,
+                ReservationNumber = viewModel.ReservationNumber,
                 DoctorId = viewModel.DoctorId,
                 ElectronicQueueId = viewModel.ElectronicQueueId
             };
