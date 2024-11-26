@@ -47,12 +47,12 @@ namespace ClinicQueueDataBaseImplement.Implements
 
         public List<DoctorViewModel> GetFilteredAll(DoctorSearchModel model)
         {
-            if (string.IsNullOrEmpty(model.Surname) || string.IsNullOrEmpty(model.Name))
+            if (string.IsNullOrEmpty(model.Specialization))
             {
                 return new();
             }
             using var context = new ClinicQueueDataBase();
-            return context.Doctors.Where(x => x.Surname.Contains(model.Surname) && x.Name.Contains(model.Name)).Select(x => x.GetViewModel).ToList();
+            return context.Doctors.Where(x => x.Specialization.Contains(model.Specialization)).Select(x => x.GetViewModel).ToList();
         }
 
         public DoctorViewModel? Insert(DoctorBindingModel model)

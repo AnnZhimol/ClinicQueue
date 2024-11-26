@@ -28,13 +28,13 @@ namespace ClinicQueueBusinessLogic.BusinessLogic
                 return false;
             }
 
-            if (appointment.Status == AppointmentStatus.Completed)
+            if (appointment.Status == AppointmentStatus.Завершен)
             {
                 _logger.LogWarning("Cannot cancel completed appointment");
                 return false;
             }
 
-            appointment.Status = AppointmentStatus.Canceled;
+            appointment.Status = AppointmentStatus.Отменен;
             _appointmentStorage.Update(ConvertToBindingModel(appointment));
             return true;
         }
@@ -73,13 +73,13 @@ namespace ClinicQueueBusinessLogic.BusinessLogic
                 return false;
             }
 
-            if (appointment.Status != AppointmentStatus.InWaiting)
+            if (appointment.Status != AppointmentStatus.Ожидание)
             {
                 _logger.LogWarning("Invalid status transition from {Status}", appointment.Status);
                 return false;
             }
 
-            appointment.Status = AppointmentStatus.InProcessing;
+            appointment.Status = AppointmentStatus.Обработка;
             _appointmentStorage.Update(ConvertToBindingModel(appointment));
             return true;
         }
@@ -95,13 +95,13 @@ namespace ClinicQueueBusinessLogic.BusinessLogic
                 return false;
             }
 
-            if (appointment.Status != AppointmentStatus.Reserved)
+            if (appointment.Status != AppointmentStatus.Забронирован)
             {
                 _logger.LogWarning("Invalid status transition from {Status}", appointment.Status);
                 return false;
             }
 
-            appointment.Status = AppointmentStatus.InWaiting;
+            appointment.Status = AppointmentStatus.Ожидание;
             _appointmentStorage.Update(ConvertToBindingModel(appointment));
             return true;
         }
@@ -117,13 +117,13 @@ namespace ClinicQueueBusinessLogic.BusinessLogic
                 return false;
             }
 
-            if (appointment.Status != AppointmentStatus.InProcessing)
+            if (appointment.Status != AppointmentStatus.Обработка)
             {
                 _logger.LogWarning("Invalid status transition from {Status}", appointment.Status);
                 return false;
             }
 
-            appointment.Status = AppointmentStatus.Completed;
+            appointment.Status = AppointmentStatus.Завершен;
             _appointmentStorage.Update(ConvertToBindingModel(appointment));
             return true;
         }
@@ -170,7 +170,7 @@ namespace ClinicQueueBusinessLogic.BusinessLogic
                 return false;
             }
 
-            if (appointmentViewModel.Status != AppointmentStatus.Created)
+            if (appointmentViewModel.Status != AppointmentStatus.Создан)
             {
                 _logger.LogWarning("Cannot reserve appointment. Current status: {Status}", appointmentViewModel.Status);
                 return false;
@@ -186,7 +186,7 @@ namespace ClinicQueueBusinessLogic.BusinessLogic
             appointmentViewModel.ReservationNumber = reservationNumber;
             appointmentViewModel.PatientId = model.PatientId;
 
-            appointmentViewModel.Status = AppointmentStatus.Reserved;
+            appointmentViewModel.Status = AppointmentStatus.Забронирован;
 
             if (_appointmentStorage.Update(ConvertToBindingModel(appointmentViewModel)) == null)
             {

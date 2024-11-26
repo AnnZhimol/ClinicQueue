@@ -43,27 +43,32 @@ namespace ClinicQueueDataBaseImplement.Implements
 
         public AppointmentViewModel? GetElement(AppointmentSearchModel model)
         {
-            if (!model.Id.HasValue)
-            {
-                return null;
-            }
-
             using var context = new ClinicQueueDataBase();
 
-            return context.Appointments
+            if (model.Id.HasValue)
+            {
+                return context.Appointments
                     .Include(x => x.Doctor)
                     .Include(x => x.Patient)
-                    .Include(x => x.ElectronicQueue) 
+                    .Include(x => x.ElectronicQueue)
+                    .FirstOrDefault(x => x.Id == model.Id)?.GetViewModel;
+            }
+
+            if (model.Status.HasValue && model.PatientId.HasValue && model.ReservationNumber.HasValue)
+            {
+                return context.Appointments
+                    .Include(x => x.Doctor)
+                    .Include(x => x.Patient)
+                    .Include(x => x.ElectronicQueue)
                     .FirstOrDefault(x =>
-                        (model.Status == null || model.Status != null) &&
-                        model.DoctorId.HasValue && x.DoctorId == model.DoctorId ||
-                        model.Id.HasValue && x.Id == model.Id ||
-                        model.PatientId.HasValue && x.PatientId == model.PatientId ||
-                        model.ElectronicQueueId.HasValue && x.ElectronicQueueId == model.ElectronicQueueId ||
-                        model.ReservationNumber.HasValue && x.ReservationNumber == model.ReservationNumber
-                    )
-                    ?.GetViewModel;
+                        x.Status == model.Status &&
+                        x.PatientId == model.PatientId &&
+                        x.ReservationNumber == model.ReservationNumber)?.GetViewModel;
+            }
+
+            return null;
         }
+
 
         public List<AppointmentViewModel> GetFilteredAll(AppointmentSearchModel model)
         {

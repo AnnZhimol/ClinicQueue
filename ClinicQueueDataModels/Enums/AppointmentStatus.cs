@@ -2,11 +2,12 @@
 {
     public enum AppointmentStatus
     {
-        Canceled = -1,
-        Created =0,
-        Reserved = 1,
-        InWaiting = 2,
-        InProcessing = 3,
-        Completed = 4
+        Нет=-2,
+        Отменен = -1,
+        Создан =0,
+        Забронирован = 1,
+        Ожидание = 2,
+        Обработка = 3,
+        Завершен = 4
     }
 }

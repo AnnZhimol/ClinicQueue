@@ -23,7 +23,7 @@ namespace ClinicQueueDataBaseImplement.Models
         public DateTime AppointmentStart { get; set; }
         [Required]
         [DataMember]
-        public AppointmentStatus Status { get; set; } = AppointmentStatus.Created;
+        public AppointmentStatus Status { get; set; } = AppointmentStatus.Создан;
         [DataMember]
         public int? PatientId { get; set; }
         public virtual Patient? Patient { get; set; }

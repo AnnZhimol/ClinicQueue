@@ -15,6 +15,7 @@ namespace ClinicQueueView
         private readonly IScheduleLogic _scheduleLogic;
         private readonly IElectronicQueueLogic _electronicQueueLogic;
         private readonly IAppointmentLogic _appointmentLogic;
+        private readonly IPatientLogic _patientLogic;
         private List<DoctorViewModel> _allDoctors;
         private readonly AdminViewModel _admin;
 
@@ -61,7 +62,7 @@ namespace ClinicQueueView
 
             if (result == MessageBoxResult.Yes)
             {
-                var mainWindow = new MainWindow(_adminLogic, _doctorLogic, _scheduleLogic, _appointmentLogic, _electronicQueueLogic);
+                var mainWindow = new MainWindow(_patientLogic ,_adminLogic, _doctorLogic, _scheduleLogic, _appointmentLogic, _electronicQueueLogic);
                 mainWindow.Show();
                 this.Close();
             }

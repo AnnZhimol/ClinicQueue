@@ -19,7 +19,7 @@ namespace ClinicQueueBusinessLogic.BusinessLogic
             _electronicQueueStorage = electronicQueueStorage;
         }
 
-        public bool Create(ElectronicQueueBindingModel model)
+        public ElectronicQueueViewModel? Create(ElectronicQueueBindingModel model)
         {
             if (model == null || !CheckModel(model))
             {
@@ -27,13 +27,14 @@ namespace ClinicQueueBusinessLogic.BusinessLogic
             }
 
             model.Status = ElectronicQueueStatus.Активна;
-            if (_electronicQueueStorage.Insert(model) == null)
+            var queue = _electronicQueueStorage.Insert(model);
+            if (queue == null)
             {
                 _logger.LogWarning("Insert operation failed");
-                return false;
+                return null;
             }
             _logger.LogInformation("Created electronic queue entry with Id: {Id}", model.Id);
-            return true;
+            return queue;
         }
 
         public bool isCompleted(ElectronicQueueBindingModel model)

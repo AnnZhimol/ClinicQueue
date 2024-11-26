@@ -14,13 +14,15 @@ namespace ClinicQueueView
         private readonly IScheduleLogic _scheduleLogic;
         private readonly IAppointmentLogic _appointmentLogic;
         private readonly IElectronicQueueLogic _electronicQueueLogic;
-        public MainWindow(IAdminLogic adminLogic, IDoctorLogic doctorLogic, IScheduleLogic scheduleLogic, IAppointmentLogic appointmentLogic, IElectronicQueueLogic electronicQueueLogic)
+        private readonly IPatientLogic _patientLogic;
+        public MainWindow(IPatientLogic patientLogic, IAdminLogic adminLogic, IDoctorLogic doctorLogic, IScheduleLogic scheduleLogic, IAppointmentLogic appointmentLogic, IElectronicQueueLogic electronicQueueLogic)
         {
             _adminLogic = adminLogic;
             _doctorLogic = doctorLogic;
             _scheduleLogic = scheduleLogic;
             _appointmentLogic = appointmentLogic;
             _electronicQueueLogic = electronicQueueLogic;
+            _patientLogic = patientLogic;
             InitializeComponent();
         }
 
@@ -101,7 +103,7 @@ namespace ClinicQueueView
 
                 if (admin != null)
                 {
-                    MessageBox.Show("Добро пожаловать, Администратор!", "Успешный вход", MessageBoxButton.OK, MessageBoxImage.Information);
+                    MessageBox.Show("Добро пожаловать!", "Успешный вход", MessageBoxButton.OK, MessageBoxImage.Information);
                     AdminWindow adminWindow = new AdminWindow(_adminLogic, _doctorLogic, _scheduleLogic, _electronicQueueLogic, _appointmentLogic, admin);
                     adminWindow.Show();
                     Close();
@@ -123,11 +125,11 @@ namespace ClinicQueueView
 
                 if (doctor != null)
                 {
-                    MessageBox.Show("Добро пожаловать, Врач!", "Успешный вход", MessageBoxButton.OK, MessageBoxImage.Information);
+                    MessageBox.Show("Добро пожаловать!", "Успешный вход", MessageBoxButton.OK, MessageBoxImage.Information);
   
-                    //DoctorWindow doctorWindow = new DoctorWindow(); // Замените DoctorWindow на ваше окно врача
-                    //doctorWindow.Show();
-                    //Close();
+                    DoctorWindow doctorWindow = new DoctorWindow(_adminLogic, _doctorLogic, _scheduleLogic, _electronicQueueLogic, _appointmentLogic, _patientLogic, doctor);
+                    doctorWindow.Show();
+                    Close();
                 }
                 else
                 {

@@ -35,15 +35,19 @@ namespace ClinicQueueDataBaseImplement.Implements
         public PatientViewModel? GetElement(PatientSearchModel model)
         {
             using var context = new ClinicQueueDataBase();
+
             if (model.Id.HasValue)
                 return context.Patients.FirstOrDefault(x => x.Id == model.Id)?.GetViewModel;
+
             if (!string.IsNullOrEmpty(model.Name) && !string.IsNullOrEmpty(model.Surname)
                 && !string.IsNullOrEmpty(model.Patronymic) && (!string.IsNullOrEmpty(model.PassportNumber) || !string.IsNullOrEmpty(model.OMSNumber)))
                 return context.Patients.FirstOrDefault(x => x.Name.Equals(model.Name) && x.Surname.Equals(model.Surname)
                 && x.Patronymic.Equals(model.Patronymic) && (x.PassportNumber.Equals(model.PassportNumber) || x.OMSNumber.Equals(model.OMSNumber)))?.GetViewModel;
-            if (!string.IsNullOrEmpty(model.Name) && !string.IsNullOrEmpty(model.Surname) && (!string.IsNullOrEmpty(model.PassportNumber) || !string.IsNullOrEmpty(model.OMSNumber)))
+
+            if (!string.IsNullOrEmpty(model.Name) && !string.IsNullOrEmpty(model.Surname)
+                && string.IsNullOrEmpty(model.Patronymic) && (!string.IsNullOrEmpty(model.PassportNumber) || !string.IsNullOrEmpty(model.OMSNumber)))
                 return context.Patients.FirstOrDefault(x => x.Name.Equals(model.Name) && x.Surname.Equals(model.Surname)
-                && (x.PassportNumber.Equals(model.PassportNumber) || x.OMSNumber.Equals(model.OMSNumber)))?.GetViewModel;
+                && x.Patronymic.Equals(model.Patronymic) && (x.PassportNumber.Equals(model.PassportNumber) || x.OMSNumber.Equals(model.OMSNumber)))?.GetViewModel;
             return null;
         }
 

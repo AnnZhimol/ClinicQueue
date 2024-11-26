@@ -11,5 +11,6 @@ namespace ClinicQueueContracts.ViewModels
         public string Password { get; set; } = string.Empty;
         public string CabinetNumber { get; set; } = string.Empty;
         public int Id { get; set; }
+        public string FullName => $"{Surname} {Name} {Patronymic}";
     }
 }
